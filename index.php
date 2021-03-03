@@ -45,6 +45,33 @@
         }
         echo '<hr>';
 
+        $nomDoe = $pdo->prepare("SELECT * from table_test_php.clients WHERE cardNumber!='null'");
+        $state = $nomDoe->execute();
+        if ($state){
+            foreach ($nomDoe->fetchAll() as $user){
+                echo "id: ".$user['id'].' '.$user['cardNumber'].'<br>';
+            }
+        }
+        echo '<hr>';
+
+        $nomDoe = $pdo->prepare("SELECT * from table_test_php.clients WHERE lastName LIKE 'M%' ");
+        $state = $nomDoe->execute();
+        if ($state){
+            foreach ($nomDoe->fetchAll() as $user){
+                echo "id: ".$user['id'].' '.$user['lastName']." ". $user['firstName'].'<br>';
+            }
+        }
+        echo '<hr>';
+
+        $nomDoe = $pdo->prepare("SELECT * from table_test_php.shows");
+        $state = $nomDoe->execute();
+        if ($state){
+            foreach ($nomDoe->fetchAll() as $user){
+                echo $user['title']." ".$user['performer']." ".$user['date'] .'<br>';
+            }
+        }
+        echo '<hr>';
+
     }
     catch (PDOException $exception) {
         echo $exception->getMessage();
